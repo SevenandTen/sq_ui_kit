@@ -3,6 +3,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:squikit/source_control.dart';
 
 class SQTimePicker  {
   // ignore: non_constant_identifier_names
@@ -14,8 +15,6 @@ class SQTimePicker  {
   // ignore: non_constant_identifier_names
   static int YYMMDDHHmm = 4; ///年月日 时分钟
 // ignore: non_constant_identifier_names
-
-
 
   static void showTimePicker({
       required BuildContext context ,
@@ -161,7 +160,7 @@ class SQTimeSelectState extends State<SQTimeSelectView> {
         ],)),
 
         if(widget.hasLongTime == true)
-          Container(height: 5,color: Color(0xFFE9E9E9) ,),
+          Container(height: 5,color: const Color(0xFFE9E9E9) ,),
         if(widget.hasLongTime == true)
          GestureDetector(
            onTap: (){
@@ -382,7 +381,7 @@ class SQDateSelectView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     if(type == 1) {
-      return WYDateSelectState();
+      return  WYDateSelectState();
     }
     return WYCalendarSelectState();
   }
@@ -585,7 +584,7 @@ class WYDateSelectState extends State<SQDateSelectView> {
           Spacer(),
           Text(year + "-" + month + "-" + day1,style: TextStyle(fontSize:16,color: Color(0xFFAAAAAA) ),),
           SizedBox(width: 28,),
-          Image.asset("image/ico_hyxq_arrived@2x.png",height: 20,width: 20,),
+          Image.asset(SourceControl.getPath("assert/images/ico_hyxq_arrived@2x.png"),height: 20,width: 20,),
           SizedBox(width: 28,),
           Text(year + "-" + month + "-" + day2,style: TextStyle(fontSize:16,color: Color(0xFFAAAAAA) ),),
           Spacer(),
@@ -747,12 +746,12 @@ class WYCalendarSelectState extends State<SQDateSelectView> {
                 Spacer(),
                 _getNavigatorBtn(1,someTimeList),
               ],) ,
-              Center(child: Text("选择日期",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color:Color(0xFF333333) ),),),
+             const  Center(child: Text("选择日期",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color:Color(0xFF333333) ),),),
             ],)
         ),
         Container(
           height: 38,
-          color: Color(0xFFF6F7FB),
+          color: const Color(0xFFF6F7FB),
           child: _getTimeChildWidget(someTimeList),
         ),
         // Expanded(child: _getScrollWidget(someTimeList)),
@@ -851,13 +850,13 @@ class WYCalendarSelectState extends State<SQDateSelectView> {
         print(list);
 
         return Row(crossAxisAlignment: CrossAxisAlignment.center,children: [
-          Spacer(),
-          Text(year + "-" + month + "-" + day1,style: TextStyle(fontSize:16,color: Color(0xFFAAAAAA) ),),
-          SizedBox(width: 28,),
-          Image.asset("image/ico_hyxq_arrived@2x.png",height: 20,width: 20,),
-          SizedBox(width: 28,),
-          Text(year2 + "-" + month2 + "-" + day2,style: TextStyle(fontSize:16,color: Color(0xFFAAAAAA) ),),
-          Spacer(),
+          const Spacer(),
+          Text("$year-$month-$day1",style: const TextStyle(fontSize:16,color: Color(0xFFAAAAAA) ),),
+          const SizedBox(width: 28,),
+          Image.asset(SourceControl.getPath("assert/images/ico_hyxq_arrived@2x.png"),height: 20,width: 20,),
+          const SizedBox(width: 28,),
+          Text("$year2-$month2-$day2",style: const TextStyle(fontSize:16,color: Color(0xFFAAAAAA) ),),
+          const Spacer(),
         ],);
 
 

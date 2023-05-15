@@ -2,6 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:squikit/source_control.dart';
+import 'package:squikit/sqbtn/sq_seletced_btn.dart';
 
 class SQCarNumberPicker {
 
@@ -166,16 +168,20 @@ class WYCarNumberState extends State<WYCarNumberView> {
          Spacer(),
          GestureDetector(
            onTap: (){
-            isNew = ! isNew;
-            if(isNew == true) {
-              if(step == 6 && six.isNotEmpty) {
-                step = 7;
-              }
-            }else {
-              if(step == 7) {
-                step = 6;
-              }
-            }
+             isNew = ! isNew;
+             if(isNew == true) {
+               if(six == "挂"){
+                 six = "";
+               }
+               if(step == 6 && six.isNotEmpty) {
+                 step = 7;
+               }
+             }else {
+               seven = "";
+               if(step == 7) {
+                 step = 6;
+               }
+             }
             setState(() {
 
             });
@@ -183,39 +189,67 @@ class WYCarNumberState extends State<WYCarNumberView> {
            child: Container(
              color: Colors.transparent,
              child: Row(children: [
-               Image.asset( isNew ? "assets/btn_xz_pre@2x.png" : "assets/btn_xz_nor@2x.png",width: 20,height: 20,),
-               SizedBox(width: 7,),
-               Text("新能源车",style: TextStyle(color: Color(0xFF01D28E),fontSize: 15),),
-               SizedBox(width: 12,),
+               SQSelectedBtn(selected: isNew),
+               const  SizedBox(width: 7,),
+               const Text("新能源车",style: TextStyle(color: Color(0xFF01D28E),fontSize: 15),),
+               const SizedBox(width: 12,),
              ],),
            ),
          ),
        ],),
-       SizedBox(height: 18,),
+       const SizedBox(height: 18,),
        WYCarNumberInputView(step: step,isNew: isNew,callBack: (text){
          if(text == "-1") {
            if(step == 0) {
-               zero = "";
+             zero = "";
            }else if(step == 1) {
+             if(one.isNotEmpty) {
                one = "";
-               step = step - 1;
+             }else {
+               zero = "";
+             }
+             step = step - 1;
            }else if(step == 2) {
+             if(two.isNotEmpty) {
                two = "";
-               step = step - 1;
+             }else {
+               one = "";
+             }
+             step = step - 1;
            }else if(step == 3) {
+             if(three.isNotEmpty) {
                three = "";
-               step = step - 1;
+             }else {
+               two = "";
+             }
+             step = step - 1;
            }else if(step == 4) {
+             if(four.isNotEmpty) {
                four = "";
-               step = step - 1;
+             }else {
+               three = "";
+             }
+             step = step - 1;
            }else if(step == 5) {
+             if(five.isNotEmpty) {
                five = "";
-               step = step - 1;
+             }else {
+               four = "";
+             }
+             step = step - 1;
            }else if(step == 6) {
+             if(six.isNotEmpty) {
                six = "";
-               step = step - 1;
+             }else {
+               five = "";
+             }
+             step = step - 1;
            }else if(step == 7) {
-             seven = "";
+             if(seven.isNotEmpty) {
+               seven = "";
+             }else{
+               six = "";
+             }
              step = step - 1;
            }
          }else {
@@ -593,7 +627,7 @@ class WYCarNumberInputBackState extends State<WYCarNumberInputBackBtn> {
           border: Border.all(color: Color(0xFFD5D5D5),width: 0.5),
         ),
         alignment: Alignment.center,
-        child: Image.asset("assets/icon_back@2x.png",width: 22.5,height: 16,),
+        child: Image.asset(SourceControl.getPath("assert/images/icon_back@2x.png"),width: 22.5,height: 16,),
 
       ),
     );
