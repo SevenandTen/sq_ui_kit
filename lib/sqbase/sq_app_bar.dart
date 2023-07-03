@@ -100,7 +100,7 @@ class SjbAppBarState extends State<SQAppBar> {
       return widget.middleWidget;
     }else{
       return Container(
-        margin: EdgeInsets.only(left: 40,right: 40),
+        margin: const EdgeInsets.only(left: 40,right: 40),
         child: Text(
           widget.title,
           maxLines: 1,
