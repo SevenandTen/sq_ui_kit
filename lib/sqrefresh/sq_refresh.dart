@@ -9,8 +9,9 @@ class SQRefresh extends StatefulWidget {
   final Widget Function(BuildContext context, int index)? itemBuilder;
 
   final Widget? emptyWidget;
+  final bool firstRefresh;
 
-  const SQRefresh({super.key, required this.model, this.itemBuilder, this.emptyWidget});
+  const SQRefresh({super.key, required this.model, this.itemBuilder, this.emptyWidget,  this.firstRefresh = true});
   @override
   State<StatefulWidget> createState() {
     return _SQRefreshState();
@@ -19,6 +20,13 @@ class SQRefresh extends StatefulWidget {
 }
 
 class _SQRefreshState extends State<SQRefresh> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      widget.model._refreshController.requestRefresh();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
